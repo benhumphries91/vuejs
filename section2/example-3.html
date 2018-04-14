@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <link rel="stylesheet" href="">
+    <script src="/node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- $event is a protected variable made by vue to store the event object so it can be passed as a variable -->
+    <button v-on:click="increase(2, $event)">Click Me</button>
+    <p>{{ counter }}</p>
+    <p v-on:mousemove="updateCoordinates">
+        Coordinates: {{ x }} / {{ y }}
+        - <span v-on:mousemove.stop="">Dead Spot</span>
+    </p>
+
+    <input type="text" v-on:keyup.enter="alertMe">
+</div>
+<script>
+    new Vue({
+       el: '#app',
+       data: {
+          counter: 0,
+           x: 0,
+           y: 0
+       },
+        methods: {
+            increase: function(step, event) {
+               this.counter += step;
+            },
+            updateCoordinates: function () {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            alertMe: function () {
+                alert('Alert!');
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
